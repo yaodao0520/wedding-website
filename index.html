@@ -204,15 +204,19 @@
     </div>
     <!-- 视频区域 -->
     <div class="container animate-box">
-      <div class="fh5co-video fh5co-bg" style="background-image: url(images/img_bg_3.jpg); position: relative;">
+      <div class="fh5co-video fh5co-bg" style="background-image: url(images/img_bg_3.jpg); position: relative; width:100%; padding-top:56.25%;">
+        <!-- 56.25% 是 16:9 比例占位 -->
         <!-- 播放按钮 -->
-        <a href="javascript:void(0);" class="play-btn" onclick="document.getElementById('myVideo').style.display='block'; this.style.display='none';">
-          <i class="icon-video2"></i>
+        <a href="javascript:void(0);" class="play-btn" 
+           onclick="document.getElementById('myVideo').style.display='block'; this.style.display='none';"
+           style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:2;">
+          <i class="icon-video2" style="font-size:50px; color:white;"></i>
         </a>
         <!-- 遮罩 -->
-        <div class="overlay"></div>
-        <!-- 隐藏的视频播放器 -->
-        <video id="myVideo" width="640" height="360" controls style="display:none; position: relative; z-index:2;">
+        <div class="overlay" style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.3);"></div>
+        <!-- 视频播放器 -->
+        <video id="myVideo" controls 
+               style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:1;">
           <source src="https://yaodao0521.zone.id/raw/ai%E8%A7%86%E9%A2%91%E6%8D%A2%E8%84%B8/jingtian.png17391142801_HD.mp4" type="video/mp4">
           您的浏览器不支持 video 标签，请
           <a href="https://yaodao0521.zone.id/raw/ai%E8%A7%86%E9%A2%91%E6%8D%A2%E8%84%B8/jingtian.png17391142801_HD.mp4">下载视频</a>观看。
@@ -225,10 +229,6 @@
 <div class="gototop js-top">
   <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 </div>
-
-	<div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-	</div>
 
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
