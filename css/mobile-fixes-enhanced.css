@@ -1,0 +1,251 @@
+/* 增强版移动端响应式修复 */
+
+/* 强制移动端视口设置 */
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* 容器修复 */
+.container {
+  max-width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* 移动端导航修复 */
+@media screen and (max-width: 768px) {
+  .fh5co-nav {
+    padding: 15px 0;
+    background: rgba(0, 0, 0, 0.3);
+  }
+  
+  .fh5co-nav .menu-1 {
+    display: block !important;
+    text-align: center;
+  }
+  
+  .fh5co-nav ul li {
+    display: inline-block;
+    margin: 0 5px;
+  }
+  
+  .fh5co-nav ul li a {
+    font-size: 14px;
+    padding: 8px 10px;
+    display: block;
+  }
+}
+
+/* 主页面高度和布局修复 */
+@media screen and (max-width: 768px) {
+  .fh5co-cover {
+    height: auto !important;
+    min-height: 100vh;
+    padding: 2em 0;
+  }
+  
+  .fh5co-cover .display-t {
+    height: auto !important;
+    display: block !important;
+    width: 100%;
+  }
+  
+  .fh5co-cover .display-tc {
+    height: auto !important;
+    display: block !important;
+    vertical-align: top;
+    padding-top: 50px;
+    text-align: center;
+  }
+  
+  /* 标题字体调整 */
+  #fh5co-header .display-tc h1 {
+    font-size: 32px !important;
+    line-height: 1.2;
+    margin-bottom: 15px;
+  }
+  
+  #fh5co-header .display-tc h2 {
+    font-size: 16px !important;
+    margin: 15px 0;
+    line-height: 1.4;
+  }
+  
+  /* 倒计时调整 */
+  .flipTimebox {
+    margin: 20px 0;
+    transform: scale(0.8);
+  }
+}
+
+/* 超小屏幕优化 */
+@media screen and (max-width: 480px) {
+  .fh5co-nav ul li a {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+  
+  #fh5co-header .display-tc h1 {
+    font-size: 26px !important;
+  }
+  
+  #fh5co-header .display-tc h2 {
+    font-size: 14px !important;
+  }
+  
+  .flipTimebox {
+    transform: scale(0.6);
+  }
+}
+
+/* Events 区域完全重构 */
+@media screen and (max-width: 768px) {
+  #fh5co-event {
+    height: auto !important;
+    padding: 3em 0;
+  }
+  
+  #fh5co-event .display-t,
+  #fh5co-event .display-tc {
+    height: auto !important;
+    display: block !important;
+  }
+  
+  #fh5co-event .col-md-10 {
+    width: 100%;
+    padding: 0 15px;
+  }
+  
+  #fh5co-event .col-md-6 {
+    width: 100% !important;
+    float: none !important;
+    margin-bottom: 30px;
+    padding: 0;
+  }
+  
+  #fh5co-event .event-wrap {
+    margin-bottom: 30px;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* iframe 地图响应式 */
+  #fh5co-event iframe {
+    width: 100% !important;
+    height: 200px !important;
+    max-width: 100%;
+    border-radius: 4px;
+  }
+}
+
+/* Gallery 区域修复 */
+@media screen and (max-width: 768px) {
+  #fh5co-gallery-list {
+    flex-direction: column;
+  }
+  
+  #fh5co-gallery-list li.one-third {
+    width: 100% !important;
+    margin: 0 0 15px 0 !important;
+    float: none;
+  }
+  
+  #fh5co-gallery-list li {
+    min-height: 200px;
+  }
+}
+
+/* Services/Highlights 区域修复 */
+@media screen and (max-width: 768px) {
+  #fh5co-services {
+    padding: 3em 0;
+  }
+  
+  .fh5co-video {
+    height: 200px;
+    margin: 20px 0;
+  }
+  
+  .fh5co-video video,
+  #myVideo {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100%;
+    max-height: 200px;
+  }
+}
+
+/* 通用响应式修复 */
+@media screen and (max-width: 768px) {
+  .fh5co-heading h2 {
+    font-size: 30px !important;
+    margin-bottom: 20px;
+  }
+  
+  .fh5co-section {
+    padding: 3em 0;
+  }
+  
+  .btn {
+    padding: 12px 20px !important;
+    font-size: 14px !important;
+  }
+}
+
+/* 防止水平滚动 */
+* {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+img, iframe, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 返回顶部按钮调整 */
+@media screen and (max-width: 480px) {
+  .gototop {
+    bottom: 15px;
+    right: 15px;
+  }
+  
+  .gototop a {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* 强制移动端布局 */
+@media screen and (max-width: 768px) {
+  .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6,
+  .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+    width: 100% !important;
+    float: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  .col-md-offset-1, .col-md-offset-2, .col-md-offset-3, .col-md-offset-4,
+  .col-md-offset-5, .col-md-offset-6, .col-md-offset-7, .col-md-offset-8,
+  .col-md-offset-9, .col-md-offset-10, .col-md-offset-11, .col-md-offset-12 {
+    margin-left: 0 !important;
+  }
+}
+
+/* 修复文本换行 */
+@media screen and (max-width: 768px) {
+  p, span, div {
+    word-wrap: break-word;
+    word-break: break-word;
+  }
+}
+
