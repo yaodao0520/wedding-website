@@ -26,7 +26,7 @@
     <meta property="og:image:type" content="image/jpeg">
 
 
-	<link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
+	<link href=\'https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700\' rel=\'stylesheet\' type=\'text/css\'>
 	<link href="https://fonts.googleapis.com/css?family=Sacramento" rel="stylesheet">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Engagement" rel="stylesheet">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia+Sans+Condensed" rel="stylesheet">
@@ -39,7 +39,7 @@
 	<link rel="stylesheet" href="css/icomoon.css">
 	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="css/bootstrap.css">
-	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.css'>
+	<link rel=\'stylesheet\' href=\'https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.css\'>
 	<!-- Magnific Popup -->
 	<link rel="stylesheet" href="css/magnific-popup.css">
 
@@ -58,6 +58,18 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+
+    <!-- 引入高德地图JavaScript API -->
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=e9d9790d4098507693c1491d0251ab25"></script>
+    <style>
+        /* 自定义地图容器样式 */
+        .map-container {
+            width: 100%; /* 或您希望的宽度 */
+            height: 300px; /* 或您希望的高度 */
+            border: 0;
+            margin-top: 20px;
+        }
+    </style>
 
 	</head>
 	<body>
@@ -101,7 +113,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+				</div>
 		</div>
 	</header>
 
@@ -132,7 +144,7 @@
 										<span>上午11:30 </span>
 									</div>
 									<p>At <b>前往xxxxx地点</b>然后在 <b>xxxxx地方用餐</b></p>
-									<iframe src="https://m.amap.com/navi/?dest=27.00373,105.141207&destName=华宇酒店" width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+									<div id="mapContainer1" class="map-container"></div>
 								</div>
 							</div>
 							<div class="col-md-6 col-sm-6 text-center">
@@ -148,7 +160,7 @@
 										<span>中午12:00 </span>
 									</div>
 									<p>地点是 <b>xxxxx酒店</b>敬请享用 <b>祝你用餐愉快</b></p>
-						<iframe src="https://m.amap.com/navi/?dest=27.00373,105.141207&destName=腾翔酒店" width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+									<div id="mapContainer2" class="map-container"></div>
 								</div>
 							</div>
 						</div>
@@ -208,7 +220,7 @@
     <div class="container animate-box">
       <div class="fh5co-video fh5co-bg" style="background-image: url(images/img_bg_3.jpg); position: relative;">
         <!-- 播放按钮 -->
-        <a href="javascript:void(0);" class="play-btn" onclick="document.getElementById('myVideo').style.display='block'; this.style.display='none';">
+        <a href="javascript:void(0);" class="play-btn" onclick="document.getElementById(\'myVideo\').style.display=\'block\'; this.style.display=\'none\';">
           <i class="icon-video2"></i>
         </a>
         <!-- 遮罩 -->
@@ -231,14 +243,14 @@
 <script>
   function playVideo() {
     // 隐藏背景图
-    var wrapper = document.getElementById('videoWrapper');
-    wrapper.style.backgroundImage = 'none';
+    var wrapper = document.getElementById(\'videoWrapper\');
+    wrapper.style.backgroundImage = \'none\';
     // 隐藏播放按钮
-    var btn = wrapper.querySelector('.play-btn');
-    btn.style.display = 'none';
+    var btn = wrapper.querySelector(\'.play-btn\');
+    btn.style.display = \'none\';
     // 显示视频并播放
-    var video = document.getElementById('myVideo');
-    video.style.display = 'block';
+    var video = document.getElementById(\'myVideo\');
+    video.style.display = \'block\';
     video.play();
   }
 </script>
@@ -256,9 +268,9 @@
 	<script src="js/owl.carousel.min.js"></script>
 	<!-- countTo -->
 	<script src="js/jquery.countTo.js"></script>
-	<script src='https://momentjs.com/downloads/moment.js'></script>
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.14/moment-timezone-with-data-2012-2022.min.js'></script>
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.js'></script>
+	<script src=\'https://momentjs.com/downloads/moment.js\'></script>
+	<script src=\'https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.14/moment-timezone-with-data-2012-2022.min.js\'></script>
+	<script src=\'https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.js\'></script>
 	<!-- Stellar -->
 	<script src="js/jquery.stellar.min.js"></script>
 	<!-- Magnific Popup -->
@@ -270,5 +282,32 @@
 	<!-- Main -->
 	<script src="js/main.js"></script>
 	<!--<center>View Source Code on <a href="https://github.com/shyamjos/wedding-website">GitHub <img src="images/github-logo.png"> </a> </center>-->
+
+    <script type="text/javascript">
+        // 初始化第一个地图
+        var map1 = new AMap.Map(\'mapContainer1\', {
+            zoom: 13, // 缩放级别
+            center: [105.141207, 27.00373] // 中心点坐标 [经度, 纬度]
+        });
+
+        // 在第一个地图上添加标记
+        var marker1 = new AMap.Marker({
+            position: [105.141207, 27.00373], // 标记点坐标
+            map: map1
+        });
+
+        // 初始化第二个地图
+        var map2 = new AMap.Map(\'mapContainer2\', {
+            zoom: 13, // 缩放级别
+            center: [105.141207, 27.00373] // 中心点坐标 [经度, 纬度]
+        });
+
+        // 在第二个地图上添加标记
+        var marker2 = new AMap.Marker({
+            position: [105.141207, 27.00373], // 标记点坐标
+            map: map2
+        });
+    </script>
+
 	</body>
 </html>
