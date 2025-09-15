@@ -26,7 +26,7 @@
     <meta property="og:image:type" content="image/jpeg">
 
 
-	<link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
+	<link href=\'https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700\' rel=\'stylesheet\' type=\'text/css\'>
 	<link href="https://fonts.googleapis.com/css?family=Sacramento" rel="stylesheet">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Engagement" rel="stylesheet">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia+Sans+Condensed" rel="stylesheet">
@@ -39,7 +39,7 @@
 	<link rel="stylesheet" href="css/icomoon.css">
 	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="css/bootstrap.css">
-	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.css'>
+	<link rel=\'stylesheet\' href=\'https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.css\'>
 	<!-- Magnific Popup -->
 	<link rel="stylesheet" href="css/magnific-popup.css">
 
@@ -58,6 +58,30 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+
+    <style>
+        .map-options button {
+            display: block;
+            width: 150px; /* 调整按钮宽度以适应布局 */
+            padding: 8px;
+            margin: 5px auto; /* 居中按钮 */
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+        .map-options button:hover {
+            background-color: #0056b3;
+        }
+        .map-options a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
 
 	</head>
 	<body>
@@ -132,7 +156,10 @@
 										<span>上午11:30 </span>
 									</div>
 									<p>At <b>前往xxxxx地点</b>然后在 <b>xxxxx地方用餐</b></p>
-									<iframe src="https://m.amap.com/navi/?dest=27.00373,105.141207&destName=华宇酒店" width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+									<!-- Original iframe removed -->
+                                    <div class="map-options">
+                                        <button onclick="openMap(27.00373, 105.141207, '华宇酒店')">查看地图</button>
+                                    </div>
 								</div>
 							</div>
 							<div class="col-md-6 col-sm-6 text-center">
@@ -148,7 +175,10 @@
 										<span>中午12:00 </span>
 									</div>
 									<p>地点是 <b>xxxxx酒店</b>敬请享用 <b>祝你用餐愉快</b></p>
-						<iframe src="https://m.amap.com/navi/?dest=27.00373,105.141207&destName=腾翔酒店" width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+									<!-- Original iframe removed -->
+                                    <div class="map-options">
+                                        <button onclick="openMap(27.00373, 105.141207, '腾翔酒店')">查看地图</button>
+                                    </div>
 								</div>
 							</div>
 						</div>
@@ -156,7 +186,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 
 
 	<div id="fh5co-gallery" class="fh5co-section-gray">
@@ -208,7 +237,7 @@
     <div class="container animate-box">
       <div class="fh5co-video fh5co-bg" style="background-image: url(images/img_bg_3.jpg); position: relative;">
         <!-- 播放按钮 -->
-        <a href="javascript:void(0);" class="play-btn" onclick="document.getElementById('myVideo').style.display='block'; this.style.display='none';">
+        <a href="javascript:void(0);" class="play-btn" onclick="document.getElementById(\'myVideo\').style.display=\'block\'; this.style.display=\'none\';">
           <i class="icon-video2"></i>
         </a>
         <!-- 遮罩 -->
@@ -231,15 +260,69 @@
 <script>
   function playVideo() {
     // 隐藏背景图
-    var wrapper = document.getElementById('videoWrapper');
-    wrapper.style.backgroundImage = 'none';
+    var wrapper = document.getElementById(\'videoWrapper\');
+    wrapper.style.backgroundImage = \'none\';
     // 隐藏播放按钮
-    var btn = wrapper.querySelector('.play-btn');
-    btn.style.display = 'none';
+    var btn = wrapper.querySelector(\'.play-btn\');
+    btn.style.display = \'none\';
     // 显示视频并播放
-    var video = document.getElementById('myVideo');
-    video.style.display = 'block';
+    var video = document.getElementById(\'myVideo\');
+    video.style.display = \'block\';
     video.play();
+  }
+
+  // 地图选择功能
+  function openMap(lat, lon, name) {
+    const mapOptionsHtml = `
+        <div style="text-align: center; padding: 10px;">
+            <h3>选择地图应用打开 ${name}:</h3>
+            <button onclick="window.open(\'https://www.google.com/maps/search/?api=1&query=${lat},${lon}&query_place_id=${name}\');">Google 地图</button>
+            <button onclick="window.open(\'http://maps.apple.com/?q=${name}&ll=${lat},${lon}\');">Apple 地图</button>
+            <button onclick="
+                const amapUrl = \'amapuri://route/plan/?dlat=${lat}&dlon=${lon}&dname=${name}&dev=0&t=0\';
+                const amapWebUrl = \'https://m.amap.com/navi/?dest=${lat},${lon}&destName=${name}&src=mypage&callnative=0\';
+                window.open(amapUrl);
+                setTimeout(() => {
+                    if (!document.hidden) {
+                        window.open(amapWebUrl);
+                    }
+                }, 1000);
+            ">高德地图</button>
+            <button onclick="
+                const baiduAppUrl = \'baidumap://map/marker?location=${lat},${lon}&title=${name}&content=${name}&src=webapp.mypage.open\';
+                const baiduWebUrl = \'https://map.baidu.com/search/${name}/@${lat},${lon},15z\';
+                window.open(baiduAppUrl);
+                setTimeout(() => {
+                    if (!document.hidden) {
+                        window.open(baiduWebUrl);
+                    }
+                }, 1000);
+            ">百度地图</button>
+            <button onclick="
+                const tencentAppUrl = \'qqmap://map/marker?marker=coord:${lat},${lon};title:${name};addr:${name}&referer=mypage\';
+                const tencentWebUrl = \'https://map.qq.com/uri/v1/marker?marker=coord:${lat},${lon};title:${name};addr:${name}&referer=mypage&chgpre=1\';
+                window.open(tencentAppUrl);
+                setTimeout(() => {
+                    if (!document.hidden) {
+                        window.open(tencentWebUrl);
+                    }
+                }, 1000);
+            ">腾讯地图</button>
+            <button onclick="$.magnificPopup.close();" style="background-color: #6c757d; margin-top: 15px;">关闭</button>
+        </div>
+    `;
+
+    $.magnificPopup.open({
+        items: {
+            src: mapOptionsHtml,
+            type: 'inline'
+        },
+        mainClass: 'mfp-fade',
+        removalDelay: 160,
+        preloader: false,
+        midClick: true,
+        closeBtnInside: true
+    });
   }
 </script>
 	<!-- jQuery -->
@@ -256,9 +339,9 @@
 	<script src="js/owl.carousel.min.js"></script>
 	<!-- countTo -->
 	<script src="js/jquery.countTo.js"></script>
-	<script src='https://momentjs.com/downloads/moment.js'></script>
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.14/moment-timezone-with-data-2012-2022.min.js'></script>
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.js'></script>
+	<script src=\'https://momentjs.com/downloads/moment.js\'></script>
+	<script src=\'https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.14/moment-timezone-with-data-2012-2022.min.js\'></script>
+	<script src=\'https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.js\'></script>
 	<!-- Stellar -->
 	<script src="js/jquery.stellar.min.js"></script>
 	<!-- Magnific Popup -->
@@ -272,3 +355,4 @@
 	<!--<center>View Source Code on <a href="https://github.com/shyamjos/wedding-website">GitHub <img src="images/github-logo.png"> </a> </center>-->
 	</body>
 </html>
+
