@@ -229,10 +229,6 @@
 	});
 
 
-}());
-
-
-
 	// Music control logic
 	var musicControl = function() {
 		var backgroundMusic = document.getElementById('background-music');
