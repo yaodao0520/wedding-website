@@ -231,3 +231,92 @@
 }());
 
 
+
+
+
+	// Background Music Control
+	var backgroundMusicControl = function() {
+		var backgroundMusic = document.getElementById('backgroundMusic');
+		var playPauseButton = document.getElementById('playPauseButton');
+		var myVideo = document.getElementById('myVideo');
+		var isPlaying = false;
+
+		// Function to play music
+		function playMusic() {
+			backgroundMusic.play();
+			playPauseButton.innerHTML = '⏸';
+			isPlaying = true;
+		}
+
+		// Function to pause music
+		function pauseMusic() {
+			backgroundMusic.pause();
+			playPauseButton.innerHTML = '▶';
+			isPlaying = false;
+		}
+
+		// Toggle play/pause on button click
+		playPauseButton.addEventListener('click', function() {
+			if (isPlaying) {
+				pauseMusic();
+			} else {
+				playMusic();
+			}
+		});
+
+		// Pause background music when video plays
+		myVideo.addEventListener('play', function() {
+			if (isPlaying) {
+				backgroundMusic.pause();
+			}
+		});
+
+		// Resume background music when video ends
+		myVideo.addEventListener('ended', function() {
+			if (isPlaying) {
+				backgroundMusic.play();
+			}
+		});
+
+		// Autoplay background music on page load (with user interaction fallback)
+		// Modern browsers often block autoplay without user interaction. 
+		// This attempts to play, and if blocked, waits for the first user interaction.
+		var promise = backgroundMusic.play();
+		if (promise !== undefined) {
+			promise.then(_ => {
+				// Autoplay started!
+				playPauseButton.innerHTML = '⏸';
+				isPlaying = true;
+			}).catch(error => {
+				// Autoplay was prevented. Show a play button.
+				playPauseButton.innerHTML = '▶';
+				isPlaying = false;
+				// Optionally, add a listener for the first user interaction to play music
+				document.addEventListener('click', function handler() {
+					if (!isPlaying) {
+						playMusic();
+					}
+					document.removeEventListener('click', handler);
+				}, { once: true });
+			});
+		}
+	};
+
+	$(function(){
+		mobileMenuOutsideClick();
+		parallax();
+		offcanvasMenu();
+		burgerMenu();
+		contentWayPoint();
+		dropdown();
+		testimonialCarousel();
+		goToTop();
+		loaderPage();
+		counter();
+		counterWayPoint();
+		backgroundMusicControl(); // Initialize background music control
+	});
+
+
+
+
