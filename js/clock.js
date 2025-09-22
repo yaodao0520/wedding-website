@@ -10,12 +10,23 @@ $(document).ready(function() {
   // Calculate the difference in seconds between the future and current date
   let diff = targetDate / 1000 - currentDate.getTime() / 1000;
 
+  // Add Chinese language pack for FlipClock.js
+  FlipClock.Lang.Chinese = {
+    'years': '年',
+    'months': '月',
+    'days': '日',
+    'hours': '小时',
+    'minutes': '分钟',
+    'seconds': '秒'
+  };
+
   if (diff <= 0) {
     // If remaining countdown is 0
     clock = $(".clock").FlipClock(0, {
       clockFace: "DailyCounter",
       countdown: true,
-      autostart: false
+      autostart: false,
+      language: 'Chinese'
     });
     console.log("Date has already passed!")
     
@@ -24,6 +35,7 @@ $(document).ready(function() {
     clock = $(".clock").FlipClock(diff, {
       clockFace: "DailyCounter",
       countdown: true,
+      language: 'Chinese',
       callbacks: {
         stop: function() {
           console.log("Timer has ended!")
