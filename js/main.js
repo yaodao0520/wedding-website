@@ -133,9 +133,9 @@
 			var $this = $(this);
 
 			$this
-				.find('.dropdown')
-				.css('display', 'none')
-				.removeClass('animated-fast fadeInUpMenu');
+				.removeClass('active')
+				.find('ul')
+				.slideUp(500, 'easeOutExpo');				
 		});
 
 	};
@@ -236,10 +236,10 @@
 
 	// Background Music Control
 	var backgroundMusicControl = function() {
+		var isPlaying = false; // Define isPlaying first
 		var backgroundMusic = document.getElementById('backgroundMusic');
 		var playPauseButton = document.getElementById('playPauseButton');
 		var myVideo = document.getElementById('myVideo');
-		var isPlaying = false;
 
 		// Function to play music
 		function playMusic() {
@@ -265,18 +265,20 @@
 		});
 
 		// Pause background music when video plays
-		myVideo.addEventListener('play', function() {
-			if (isPlaying) {
-				backgroundMusic.pause();
-			}
-		});
+		if (myVideo) { // Ensure myVideo element exists
+			myVideo.addEventListener('play', function() {
+				if (isPlaying) {
+					backgroundMusic.pause();
+				}
+			});
 
-		// Resume background music when video ends
-		myVideo.addEventListener('ended', function() {
-			if (isPlaying) {
-				backgroundMusic.play();
-			}
-		});
+			// Resume background music when video ends
+			myVideo.addEventListener('ended', function() {
+				if (isPlaying) {
+					backgroundMusic.play();
+				}
+			});
+		}
 
 		// Autoplay background music on page load (with user interaction fallback)
 		// Modern browsers often block autoplay without user interaction. 
@@ -316,7 +318,3 @@
 		counterWayPoint();
 		backgroundMusicControl(); // Initialize background music control
 	});
-
-
-
-
