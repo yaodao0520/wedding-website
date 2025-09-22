@@ -271,4 +271,71 @@
 	<script src="js/main.js"></script>
 	<!--<center>View Source Code on <a href="https://github.com/shyamjos/wedding-website">GitHub <img src="images/github-logo.png"> </a> </center>-->
 	</body>
+		<!-- Background Music -->
+	<audio id="backgroundMusic" loop>
+		<source src="public/audio/beijjing.mp3" type="audio/mpeg">
+		您的浏览器不支持音频元素。
+	</audio>
+
+	<div id="musicControl" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+		<button id="playPauseButton" style="background-color: #f0f0f0; border: 1px solid #ccc; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; cursor: pointer;">▶</button>
+	</div>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			var backgroundMusic = document.getElementById("backgroundMusic");
+			var playPauseButton = document.getElementById("playPauseButton");
+			var myVideo = document.getElementById("myVideo");
+			var isPlaying = false;
+
+			function playMusic() {
+				if (backgroundMusic) {
+					var playPromise = backgroundMusic.play();
+					if (playPromise !== undefined) {
+						playPromise.then(_ => {
+							playPauseButton.innerHTML = "⏸";
+							isPlaying = true;
+						}).catch(error => {
+							console.error("Autoplay was prevented or failed: ", error);
+							playPauseButton.innerHTML = "▶";
+							isPlaying = false;
+						});
+					}
+				}
+			}
+
+			function pauseMusic() {
+				if (backgroundMusic) {
+					backgroundMusic.pause();
+					playPauseButton.innerHTML = "▶";
+					isPlaying = false;
+				}
+			}
+
+			if (playPauseButton) {
+				playPauseButton.addEventListener("click", function() {
+					if (isPlaying) {
+						pauseMusic();
+					} else {
+						playMusic();
+					}
+				});
+			}
+
+			if (myVideo) { 
+				myVideo.addEventListener("play", function() {
+					if (isPlaying) {
+						backgroundMusic.pause();
+					}
+				});
+
+				myVideo.addEventListener("ended", function() {
+					if (isPlaying) {
+						backgroundMusic.play();
+					}
+				});
+			}
+		});
+	</script>
+
 </html>
