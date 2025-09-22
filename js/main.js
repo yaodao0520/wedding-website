@@ -133,9 +133,9 @@
 			var $this = $(this);
 
 			$this
-				.removeClass('active')
-				.find('ul')
-				.slideUp(500, 'easeOutExpo');				
+				.find('.dropdown')
+				.css('display', 'none')
+				.removeClass('animated-fast fadeInUpMenu');
 		});
 
 	};
@@ -237,26 +237,38 @@
 	// Background Music Control
 	var backgroundMusicControl = function() {
 		var isPlaying = false; // Define isPlaying first
-		var backgroundMusic = document.getElementById('backgroundMusic');
-		var playPauseButton = document.getElementById('playPauseButton');
-		var myVideo = document.getElementById('myVideo');
+		var backgroundMusic = document.getElementById(\'backgroundMusic\');
+		var playPauseButton = document.getElementById(\'playPauseButton\');
+		var myVideo = document.getElementById(\'myVideo\');
 
 		// Function to play music
 		function playMusic() {
-			backgroundMusic.play();
-			playPauseButton.innerHTML = '⏸';
-			isPlaying = true;
+			try {
+				var promise = backgroundMusic.play();
+				if (promise !== undefined) {
+					promise.then(_ => {
+						playPauseButton.innerHTML = \'⏸\';
+						isPlaying = true;
+					}).catch(error => {
+						console.error("Autoplay was prevented: ", error);
+						playPauseButton.innerHTML = \'▶\';
+						isPlaying = false;
+					});
+				}
+			} catch (error) {
+				console.error("Error playing music: ", error);
+			}
 		}
 
 		// Function to pause music
 		function pauseMusic() {
 			backgroundMusic.pause();
-			playPauseButton.innerHTML = '▶';
+			playPauseButton.innerHTML = \'▶\';
 			isPlaying = false;
 		}
 
 		// Toggle play/pause on button click
-		playPauseButton.addEventListener('click', function() {
+		playPauseButton.addEventListener(\'click\', function() {
 			if (isPlaying) {
 				pauseMusic();
 			} else {
@@ -266,14 +278,14 @@
 
 		// Pause background music when video plays
 		if (myVideo) { // Ensure myVideo element exists
-			myVideo.addEventListener('play', function() {
+			myVideo.addEventListener(\'play\', function() {
 				if (isPlaying) {
 					backgroundMusic.pause();
 				}
 			});
 
 			// Resume background music when video ends
-			myVideo.addEventListener('ended', function() {
+			myVideo.addEventListener(\'ended\', function() {
 				if (isPlaying) {
 					backgroundMusic.play();
 				}
@@ -287,18 +299,18 @@
 		if (promise !== undefined) {
 			promise.then(_ => {
 				// Autoplay started!
-				playPauseButton.innerHTML = '⏸';
+				playPauseButton.innerHTML = \'⏸\';
 				isPlaying = true;
 			}).catch(error => {
 				// Autoplay was prevented. Show a play button.
-				playPauseButton.innerHTML = '▶';
+				playPauseButton.innerHTML = \'▶\';
 				isPlaying = false;
 				// Optionally, add a listener for the first user interaction to play music
-				document.addEventListener('click', function handler() {
+				document.addEventListener(\'click\', function handler() {
 					if (!isPlaying) {
 						playMusic();
 					}
-					document.removeEventListener('click', handler);
+					document.removeEventListener(\'click\', handler);
 				}, { once: true });
 			});
 		}
@@ -318,3 +330,7 @@
 		counterWayPoint();
 		backgroundMusicControl(); // Initialize background music control
 	});
+
+
+
+
