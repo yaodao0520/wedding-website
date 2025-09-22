@@ -15,8 +15,8 @@ $(document).ready(function() {
     'years': '年',
     'months': '月',
     'days': '日',
-    'hours': '小时',
-    'minutes': '分钟',
+    'hours': '时',
+    'minutes': '分',
     'seconds': '秒'
   };
 
