@@ -1,0 +1,171 @@
+/* 响应式背景图片修复 - 针对横向图片在竖屏设备上的显示问题 */
+
+/* 基础背景设置 */
+.fh5co-cover {
+  background-position: center center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-attachment: scroll !important;
+}
+
+/* 桌面端和平板横屏 - 保持原有效果 */
+@media screen and (min-width: 769px), screen and (orientation: landscape) and (min-width: 481px) {
+  .fh5co-cover {
+    background-position: center center !important;
+    background-size: cover !important;
+    height: 100vh;
+    min-height: 800px;
+  }
+}
+
+/* 移动端竖屏 - 特殊处理 */
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  .fh5co-cover {
+    /* 使用contain确保整个图片可见，然后用center定位 */
+    background-size: cover !important;
+    background-position: center 30% !important; /* 稍微向上偏移，显示图片的上半部分 */
+    height: 100vh !important;
+    min-height: 100vh !important;
+  }
+  
+  /* 增强遮罩层，确保文字可读性 */
+  .fh5co-cover .overlay {
+    background: rgba(0, 0, 0, 0.4) !important;
+  }
+}
+
+/* 超小屏幕设备 */
+@media screen and (max-width: 480px) and (orientation: portrait) {
+  .fh5co-cover {
+    background-position: center 25% !important; /* 更多向上偏移 */
+    background-size: cover !important;
+  }
+  
+  .fh5co-cover .overlay {
+    background: rgba(0, 0, 0, 0.5) !important;
+  }
+}
+
+/* 特别小的设备（如iPhone SE） */
+@media screen and (max-width: 375px) and (orientation: portrait) {
+  .fh5co-cover {
+    background-position: center 20% !important;
+    background-size: cover !important;
+  }
+}
+
+/* 移动端横屏模式 */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .fh5co-cover {
+    background-position: center center !important;
+    background-size: cover !important;
+    height: 100vh !important;
+  }
+}
+
+/* 确保内容区域在所有设备上正确显示 */
+@media screen and (max-width: 768px) {
+  .fh5co-cover .container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+  }
+  
+  .fh5co-cover .row {
+    width: 100%;
+  }
+  
+  .fh5co-cover .display-t {
+    height: 100vh !important;
+    display: table !important;
+    width: 100%;
+  }
+  
+  .fh5co-cover .display-tc {
+    height: 100vh !important;
+    display: table-cell !important;
+    vertical-align: middle !important;
+    text-align: center;
+    padding: 20px 15px;
+  }
+  
+  /* 文字样式优化 */
+  #fh5co-header .display-tc h1 {
+    color: #fff !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7) !important;
+    font-size: 28px !important;
+    line-height: 1.2;
+    margin-bottom: 15px;
+  }
+  
+  #fh5co-header .display-tc h2 {
+    color: #fff !important;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7) !important;
+    font-size: 16px !important;
+    margin: 15px 0;
+    line-height: 1.4;
+  }
+  
+  /* 心形图片优化 */
+  #fh5co-header .display-tc img {
+    max-width: 80px !important;
+    height: auto !important;
+    margin: 15px 0;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+  }
+  
+  /* 倒计时优化 */
+  .flipTimebox {
+    margin: 20px 0;
+    transform: scale(0.85);
+  }
+  
+  /* 按钮优化 */
+  #fh5co-header .btn {
+    margin-top: 20px;
+    padding: 12px 24px !important;
+    font-size: 14px !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: #333 !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+  }
+}
+
+/* 超小屏幕文字调整 */
+@media screen and (max-width: 480px) {
+  #fh5co-header .display-tc h1 {
+    font-size: 24px !important;
+  }
+  
+  #fh5co-header .display-tc h2 {
+    font-size: 14px !important;
+  }
+  
+  #fh5co-header .display-tc img {
+    max-width: 60px !important;
+  }
+  
+  .flipTimebox {
+    transform: scale(0.7);
+  }
+}
+
+/* 特别小屏幕 */
+@media screen and (max-width: 375px) {
+  #fh5co-header .display-tc h1 {
+    font-size: 22px !important;
+  }
+  
+  #fh5co-header .display-tc h2 {
+    font-size: 13px !important;
+  }
+  
+  .flipTimebox {
+    transform: scale(0.6);
+  }
+}
+
