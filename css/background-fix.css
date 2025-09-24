@@ -1,0 +1,76 @@
+/* 背景图片显示修复 */
+
+/* 修复主页背景图片显示问题 */
+.fh5co-cover {
+  background-position: center center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-attachment: scroll !important;
+}
+
+/* 桌面端优化 */
+@media screen and (min-width: 769px) {
+  .fh5co-cover {
+    height: 100vh;
+    min-height: 800px;
+  }
+  
+  .fh5co-cover .display-t,
+  .fh5co-cover .display-tc {
+    height: 100vh;
+    min-height: 800px;
+  }
+}
+
+/* 移动端背景图片特别优化 */
+@media screen and (max-width: 768px) {
+  .fh5co-cover {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    background-position: center center !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+  }
+  
+  /* 确保内容区域正确显示 */
+  .fh5co-cover .container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .fh5co-cover .row {
+    width: 100%;
+  }
+  
+  .fh5co-cover .display-t {
+    height: 100vh !important;
+    display: table !important;
+    width: 100%;
+  }
+  
+  .fh5co-cover .display-tc {
+    height: 100vh !important;
+    display: table-cell !important;
+    vertical-align: middle !important;
+    text-align: center;
+  }
+}
+
+/* 超小屏幕特别处理 */
+@media screen and (max-width: 480px) {
+  .fh5co-cover {
+    background-position: center center !important;
+  }
+}
+
+/* 横屏模式优化 */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .fh5co-cover {
+    background-position: center center !important;
+    background-size: cover !important;
+    height: 100vh !important;
+  }
+}
