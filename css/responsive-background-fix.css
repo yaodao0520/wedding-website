@@ -3,42 +3,45 @@
 /* 基础背景设置 */
 .fh5co-cover {
   background-position: center center !important;
-  background-size: cover !important;
+  background-size: contain !important; /* 确保图片完整显示 */
   background-repeat: no-repeat !important;
   background-attachment: scroll !important;
+  background-color: rgba(255, 255, 255, 0.5) !important; /* 默认背景色，可根据需要调整透明度 */
 }
 
 /* 桌面端和平板横屏 - 保持原有效果 */
 @media screen and (min-width: 769px), screen and (orientation: landscape) and (min-width: 481px) {
   .fh5co-cover {
     background-position: center center !important;
-    background-size: cover !important;
+    background-size: cover !important; /* 桌面端仍使用cover，以填充整个屏幕 */
     height: 100vh;
     min-height: 800px;
+    background-color: transparent !important; /* 桌面端不需要背景色 */
   }
 }
 
 /* 移动端竖屏 - 特殊处理 */
 @media screen and (max-width: 768px) and (orientation: portrait) {
   .fh5co-cover {
-    /* 使用contain确保整个图片可见，然后用center定位 */
-    background-size: cover !important;
-    background-position: center 30% !important; /* 稍微向上偏移，显示图片的上半部分 */
+    background-size: contain !important; /* 确保图片完整显示 */
+    background-position: center center !important; /* 居中显示 */
     height: 100vh !important;
     min-height: 100vh !important;
+    background-color: rgba(255, 255, 255, 0.5) !important; /* 调整背景色透明度 */
   }
   
   /* 增强遮罩层，确保文字可读性 */
   .fh5co-cover .overlay {
-    background: rgba(0, 0, 0, 0.4) !important;
+    background: rgba(0, 0, 0, 0.4) !important; /* 保持遮罩层，确保文字可读 */
   }
 }
 
 /* 超小屏幕设备 */
 @media screen and (max-width: 480px) and (orientation: portrait) {
   .fh5co-cover {
-    background-position: center 25% !important; /* 更多向上偏移 */
-    background-size: cover !important;
+    background-position: center center !important;
+    background-size: contain !important;
+    background-color: rgba(255, 255, 255, 0.5) !important;
   }
   
   .fh5co-cover .overlay {
@@ -49,8 +52,9 @@
 /* 特别小的设备（如iPhone SE） */
 @media screen and (max-width: 375px) and (orientation: portrait) {
   .fh5co-cover {
-    background-position: center 20% !important;
-    background-size: cover !important;
+    background-position: center center !important;
+    background-size: contain !important;
+    background-color: rgba(255, 255, 255, 0.5) !important;
   }
 }
 
@@ -58,8 +62,9 @@
 @media screen and (max-width: 768px) and (orientation: landscape) {
   .fh5co-cover {
     background-position: center center !important;
-    background-size: cover !important;
+    background-size: cover !important; /* 横屏时仍可使用cover */
     height: 100vh !important;
+    background-color: transparent !important;
   }
 }
 
@@ -168,4 +173,3 @@
     transform: scale(0.6);
   }
 }
-
