@@ -26,20 +26,25 @@ body {
     background: rgba(0, 0, 0, 0.3);
   }
   
+  /* 隐藏导航链接，只保留汉堡菜单图标 */
   .fh5co-nav .menu-1 {
+    display: none !important;
+  }
+  
+  /* 确保汉堡菜单图标可见 */
+  .js-fh5co-nav-toggle {
     display: block !important;
-    text-align: center;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 1002; /* 确保在最上层 */
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    padding: 10px;
   }
   
-  .fh5co-nav ul li {
-    display: inline-block;
-    margin: 0 5px;
-  }
-  
-  .fh5co-nav ul li a {
-    font-size: 14px;
-    padding: 8px 10px;
-    display: block;
+  .js-fh5co-nav-toggle i {
+    color: #fff;
   }
 }
 
@@ -113,11 +118,6 @@ body {
 
 /* 超小屏幕优化 */
 @media screen and (max-width: 480px) {
-  .fh5co-nav ul li a {
-    font-size: 12px;
-    padding: 6px 8px;
-  }
-  
   #fh5co-header .display-tc h1 {
     font-size: 24px !important;
   }
